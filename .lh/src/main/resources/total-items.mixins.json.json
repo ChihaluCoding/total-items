@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/main/resources/total-items.mixins.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1760867551080,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1760867551080,
+            "name": "Commit-0",
+            "content": "{\n\t\"required\": true,\n\t\"package\": \"chihalu.totalitems.mixin\",\n\t\"compatibilityLevel\": \"JAVA_21\",\n\t\"mixins\": [\n\t],\n\t\"injectors\": {\n\t\t\"defaultRequire\": 1\n\t},\n\t\"overwrites\": {\n\t\t\"requireAnnotations\": true\n\t}\n}"
+        }
+    ]
+}

@@ -20,9 +20,6 @@
 		],
 		"client": [
 			"chihalu.totalitems.TotalItemsClient"
-		],
-		"fabric-datagen": [
-			"chihalu.totalitems.TotalItemsDataGenerator"
 		]
 	},
 	"mixins": [

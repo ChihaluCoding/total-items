@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/main/java/chihalu/totalitems/TotalItems.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1760867549787,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1760867549787,
+            "name": "Commit-0",
+            "content": "package chihalu.totalitems;\n\nimport net.fabricmc.api.ModInitializer;\n\nimport org.slf4j.Logger;\nimport org.slf4j.LoggerFactory;\nimport chihalu.totalitems.command.TotalItemsCommand;\n\npublic class TotalItems implements ModInitializer {\n\tpublic static final String MOD_ID = \"total-items\";\n\n\t// This logger is used to write text to the console and the log file.\n\t// It is considered best practice to use your mod id as the logger's name.\n\t// That way, it's clear which mod wrote info, warnings, and errors.\n\tpublic static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);\n\n\t@Override\n\tpublic void onInitialize() {\n\t\t// This code runs as soon as Minecraft is in a mod-load-ready state.\n\t\t// However, some things (like resources) may still be uninitialized.\n\t\t// Proceed with mild caution.\n\n\t\t// コマンドを登録\n\t\tTotalItemsCommand.register();\n\t\t\n\t\tLOGGER.info(\"Hello Fabric world!\");\n\t}\n}"
+        }
+    ]
+}

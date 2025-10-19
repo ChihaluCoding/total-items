@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import chihalu.totalitems.command.TotalItemsCommand;
 
 public class TotalItems implements ModInitializer {
 	public static final String MOD_ID = "total-items";
@@ -19,6 +20,9 @@ public class TotalItems implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 
+		// コマンドを登録
+		TotalItemsCommand.register();
+		
 		LOGGER.info("Hello Fabric world!");
 	}
 }

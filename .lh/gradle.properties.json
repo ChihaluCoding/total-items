@@ -1,0 +1,18 @@
+{
+    "sourceFile": "gradle.properties",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1760867547901,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1760867547901,
+            "name": "Commit-0",
+            "content": "# Done to increase the memory available to gradle.\norg.gradle.jvmargs=-Xmx1G\norg.gradle.parallel=true\n\n# IntelliJ IDEA is not yet fully compatible with configuration cache, see: https://github.com/FabricMC/fabric-loom/issues/1349\norg.gradle.configuration-cache=false\n\n# Fabric Properties\n# check these on https://fabricmc.net/develop\nminecraft_version=1.21.9\nyarn_mappings=1.21.9+build.1\nloader_version=0.17.3\nloom_version=1.11-SNAPSHOT\n\n# Mod Properties\nmod_version=1.0.0\nmaven_group=chihalu.totalitems\narchives_base_name=total-items\n\n# Dependencies\nfabric_version=0.134.0+1.21.9\nmodmenu_version=11.0.0-beta.2"
+        }
+    ]
+}

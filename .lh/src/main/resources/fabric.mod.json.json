@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 7,
+            "activePatchIndex": 9,
             "patches": [
                 {
                     "date": 1760855500556,
@@ -36,6 +36,14 @@
                 {
                     "date": 1760856877575,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \t\"schemaVersion\": 1,\n \t\"id\": \"total-items\",\n \t\"version\": \"${version}\",\n \t\"name\": \"Total Items\",\n-\t\"description\": \"インベントリ内でアイテムにマウスをホバーした時にツールチップに合計数量を表示する\",\n+\t\"description\": \"インベントリ内でアイテムにマウスをホバーした時にツールチップに合計数量を表示するModです。\",\n \t\"authors\": [\n \t\t\"Chihalu\"\n \t],\n \t\"contact\": {\n"
+                },
+                {
+                    "date": 1760859879820,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \t\"schemaVersion\": 1,\n \t\"id\": \"total-items\",\n \t\"version\": \"${version}\",\n \t\"name\": \"Total Items\",\n-\t\"description\": \"インベントリ内でアイテムにマウスをホバーした時にツールチップに合計数量を表示するModです。\",\n+\t\"description\": \"インベントリ内でアイテムにマウスをホバーした時に、ツールチップに合計数量を表示するModです。\",\n \t\"authors\": [\n \t\t\"Chihalu\"\n \t],\n \t\"contact\": {\n"
+                },
+                {
+                    "date": 1760867549045,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,11 +19,8 @@\n \t\t\t\"chihalu.totalitems.TotalItems\"\n \t\t],\n \t\t\"client\": [\n \t\t\t\"chihalu.totalitems.TotalItemsClient\"\n-\t\t],\n-\t\t\"fabric-datagen\": [\n-\t\t\t\"chihalu.totalitems.TotalItemsDataGenerator\"\n \t\t]\n \t},\n \t\"mixins\": [\n \t\t\"total-items.mixins.json\",\n"
                 }
             ],
             "date": 1760855500556,

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 6,
+            "activePatchIndex": 17,
             "patches": [
                 {
                     "date": 1760856939646,
@@ -32,6 +32,50 @@
                 {
                     "date": 1760857006894,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n # Total Items\r\n \r\n-インベントリ内でアイテムにマウスをホバーした時に、ツールチップにそのアイテムの合計数量を表示するModです。\n\\ No newline at end of file\n+インベントリ内でアイテムにマウスをホバーした時に、ツールチップにインベントリ内にあるそのアイテムの合計数量を表示するModです。\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1760858438755,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,86 @@\n # Total Items\r\n \r\n-インベントリ内でアイテムにマウスをホバーした時に、ツールチップにインベントリ内にあるそのアイテムの合計数量を表示するModです。\n\\ No newline at end of file\n+インベントリ内でアイテムにマウスをホバーした時に、ツールチップにインベントリ内にあるそのアイテムの合計数量を表示するModです。\r\n+\r\n+\r\n+\r\n+\r\n+\r\n+Mod仕様書：「SafePickupRange」\r\n+■ 概要\r\n+\r\n+プレイヤーが指定したアイテムを、通常より広い範囲から自動で拾えるようにするMod。\r\n+さらに、ドロップしたアイテムがブロック内に埋まって消滅する現象を防止する機能を組み込む。\r\n+用途は、貴重なアイテムの消失防止・効率的な収集支援。\r\n+\r\n+■ 対応環境\r\n+\r\n+Minecraft：1.21.9（Fabric）\r\n+\r\n+Fabric API：0.134.0+\r\n+\r\n+Loader：Fabric Loader 0.17.3 以上\r\n+\r\n+開発言語：Java / Kotlin可\r\n+\r\n+Mod ID：safepickuprange\r\n+\r\n+■ 機能詳細\r\n+1️⃣ 拾取範囲拡張機能\r\n+\r\n+プレイヤーの周囲に存在する ItemEntity を検出。\r\n+\r\n+対象のアイテムが特定の種類であれば、通常より広い範囲から自動で拾う。\r\n+\r\n+デフォルト距離：6.0ブロック\r\n+\r\n+範囲は config.json で設定可能。\r\n+\r\n+条件例：\r\n+{\r\n+  \"pickup_range\": 6.0,\r\n+  \"target_items\": [\"minecraft:diamond\", \"minecraft:netherite_scrap\"]\r\n+}\r\n+\r\n+2️⃣ ブロック埋まり対策機能\r\n+\r\n+対象アイテムがブロック内部にある場合、\r\n+Tickごとに BlockState を判定してY座標を +0.2 上げる。\r\n+\r\n+ブロック内部で削除（discard()）されることを防止。\r\n+\r\n+空気ブロック中であれば通常通り物理演算を行う。\r\n+\r\n+3️⃣ 拾取アニメーション（オプション）\r\n+\r\n+プレイヤーに吸い寄せられる演出を追加（簡易パーティクルなど）。\r\n+\r\n+設定でON/OFF可能。\r\n+\r\n+■ 実装概要\r\n+要素\t内容\r\n+Mixin対象\tPlayerEntity#tick()\r\n+検出処理\tworld.getEntitiesByClass(ItemEntity.class, boundingBox.expand(range))\r\n+条件\titem.getStack().isOf(Items.DIAMOND)（など設定で変更可）\r\n+処理\t埋まり検知 → 高さ調整 → 距離チェック → player.sendPickup() → item.discard()\r\n+安全性\tサーバーサイド専用処理。クライアントでは描画のみ。\r\n+■ 想定シナリオ\r\n+シチュエーション\t結果\r\n+ダイヤを掘ってすぐ土で埋め立てた\t埋もれたダイヤが少し上に浮いて消えない\r\n+拾い範囲内にダイヤが落ちた\t自動で吸い寄せて拾う\r\n+他のアイテム（例：土）\t通常の拾取範囲（変更なし）\r\n+■ 将来的な拡張\r\n+\r\n+タグ指定対応：#forge:ores のようなグループ指定\r\n+\r\n+エンチャント版：装備中のアイテムに“吸引”効果を付与\r\n+\r\n+エフェクト音対応：拾取時に専用SEを再生\r\n+\r\n+■ 作者向けメモ\r\n+\r\n+ItemEntity#tick() を直接書き換えるより、\r\n+PlayerEntity#tick() で拾うほうが安全（他Modとの競合が少ない）。\r\n+\r\n+範囲内アイテムが多いときの負荷に注意。\r\n+→ 毎tickではなく 20tick（1秒） ごとでも可。\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1760858460866,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,9 +64,8 @@\n 条件\titem.getStack().isOf(Items.DIAMOND)（など設定で変更可）\r\n 処理\t埋まり検知 → 高さ調整 → 距離チェック → player.sendPickup() → item.discard()\r\n 安全性\tサーバーサイド専用処理。クライアントでは描画のみ。\r\n ■ 想定シナリオ\r\n-シチュエーション\t結果\r\n ダイヤを掘ってすぐ土で埋め立てた\t埋もれたダイヤが少し上に浮いて消えない\r\n 拾い範囲内にダイヤが落ちた\t自動で吸い寄せて拾う\r\n 他のアイテム（例：土）\t通常の拾取範囲（変更なし）\r\n ■ 将来的な拡張\r\n"
+                },
+                {
+                    "date": 1760858466838,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,9 +64,9 @@\n 条件\titem.getStack().isOf(Items.DIAMOND)（など設定で変更可）\r\n 処理\t埋まり検知 → 高さ調整 → 距離チェック → player.sendPickup() → item.discard()\r\n 安全性\tサーバーサイド専用処理。クライアントでは描画のみ。\r\n ■ 想定シナリオ\r\n-ダイヤを掘ってすぐ土で埋め立てた\t埋もれたダイヤが少し上に浮いて消えない\r\n+ダイヤを掘ってすぐで埋め立てた\t埋もれたダイヤが少し上に浮いて消えない\r\n 拾い範囲内にダイヤが落ちた\t自動で吸い寄せて拾う\r\n 他のアイテム（例：土）\t通常の拾取範囲（変更なし）\r\n ■ 将来的な拡張\r\n \r\n"
+                },
+                {
+                    "date": 1760858487220,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,11 +64,11 @@\n 条件\titem.getStack().isOf(Items.DIAMOND)（など設定で変更可）\r\n 処理\t埋まり検知 → 高さ調整 → 距離チェック → player.sendPickup() → item.discard()\r\n 安全性\tサーバーサイド専用処理。クライアントでは描画のみ。\r\n ■ 想定シナリオ\r\n-ダイヤを掘ってすぐで埋め立てた\t埋もれたダイヤが少し上に浮いて消えない\r\n+ダイヤを掘ってブロックで埋め立てた\t埋もれたダイヤが少し上に浮いて消えない\r\n 拾い範囲内にダイヤが落ちた\t自動で吸い寄せて拾う\r\n-他のアイテム（例：土）\t通常の拾取範囲（変更なし）\r\n+\t通常の拾取範囲（変更なし）\r\n ■ 将来的な拡張\r\n \r\n タグ指定対応：#forge:ores のようなグループ指定\r\n \r\n"
+                },
+                {
+                    "date": 1760858716220,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,81 +5,4 @@\n \r\n \r\n \r\n \r\n-Mod仕様書：「SafePickupRange」\r\n-■ 概要\r\n-\r\n-プレイヤーが指定したアイテムを、通常より広い範囲から自動で拾えるようにするMod。\r\n-さらに、ドロップしたアイテムがブロック内に埋まって消滅する現象を防止する機能を組み込む。\r\n-用途は、貴重なアイテムの消失防止・効率的な収集支援。\r\n-\r\n-■ 対応環境\r\n-\r\n-Minecraft：1.21.9（Fabric）\r\n-\r\n-Fabric API：0.134.0+\r\n-\r\n-Loader：Fabric Loader 0.17.3 以上\r\n-\r\n-開発言語：Java / Kotlin可\r\n-\r\n-Mod ID：safepickuprange\r\n-\r\n-■ 機能詳細\r\n-1️⃣ 拾取範囲拡張機能\r\n-\r\n-プレイヤーの周囲に存在する ItemEntity を検出。\r\n-\r\n-対象のアイテムが特定の種類であれば、通常より広い範囲から自動で拾う。\r\n-\r\n-デフォルト距離：6.0ブロック\r\n-\r\n-範囲は config.json で設定可能。\r\n-\r\n-条件例：\r\n-{\r\n-  \"pickup_range\": 6.0,\r\n-  \"target_items\": [\"minecraft:diamond\", \"minecraft:netherite_scrap\"]\r\n-}\r\n-\r\n-2️⃣ ブロック埋まり対策機能\r\n-\r\n-対象アイテムがブロック内部にある場合、\r\n-Tickごとに BlockState を判定してY座標を +0.2 上げる。\r\n-\r\n-ブロック内部で削除（discard()）されることを防止。\r\n-\r\n-空気ブロック中であれば通常通り物理演算を行う。\r\n-\r\n-3️⃣ 拾取アニメーション（オプション）\r\n-\r\n-プレイヤーに吸い寄せられる演出を追加（簡易パーティクルなど）。\r\n-\r\n-設定でON/OFF可能。\r\n-\r\n-■ 実装概要\r\n-要素\t内容\r\n-Mixin対象\tPlayerEntity#tick()\r\n-検出処理\tworld.getEntitiesByClass(ItemEntity.class, boundingBox.expand(range))\r\n-条件\titem.getStack().isOf(Items.DIAMOND)（など設定で変更可）\r\n-処理\t埋まり検知 → 高さ調整 → 距離チェック → player.sendPickup() → item.discard()\r\n-安全性\tサーバーサイド専用処理。クライアントでは描画のみ。\r\n-■ 想定シナリオ\r\n-ダイヤを掘ってブロックで埋め立てた\t埋もれたダイヤが少し上に浮いて消えない\r\n-拾い範囲内にダイヤが落ちた\t自動で吸い寄せて拾う\r\n-\t通常の拾取範囲（変更なし）\r\n-■ 将来的な拡張\r\n-\r\n-タグ指定対応：#forge:ores のようなグループ指定\r\n-\r\n-エンチャント版：装備中のアイテムに“吸引”効果を付与\r\n-\r\n-エフェクト音対応：拾取時に専用SEを再生\r\n-\r\n-■ 作者向けメモ\r\n-\r\n-ItemEntity#tick() を直接書き換えるより、\r\n-PlayerEntity#tick() で拾うほうが安全（他Modとの競合が少ない）。\r\n-\r\n-範囲内アイテムが多いときの負荷に注意。\r\n-→ 毎tickではなく 20tick（1秒） ごとでも可。\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1760867544455,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,110 @@\n # Total Items\r\n \r\n インベントリ内でアイテムにマウスをホバーした時に、ツールチップにインベントリ内にあるそのアイテムの合計数量を表示するModです。\r\n \r\n+## 機能\r\n \r\n+- **アイテムカウント表示**: 追跡対象のアイテムをマウスホバーすると、インベントリ内の合計数が表示されます\r\n+- **カスタマイズ可能**: コマンドでどのアイテムを追跡するか自由に設定できます\r\n+- **簡単な操作**: スラッシュコマンドで直感的に管理できます\r\n \r\n+## コマンド\r\n \r\n+### MOD全体の有効/無効\r\n \r\n+```\r\n+/totalitems on      # MODを有効化\r\n+/totalitems off     # MODを無効化\r\n+```\r\n+\r\n+### アイテムの追跡対象管理\r\n+\r\n+#### 方法1: アイテムIDを直接指定\r\n+\r\n+```\r\n+/totalitems enable <itemId>    # アイテムを追跡対象に追加\r\n+/totalitems disable <itemId>   # アイテムを追跡対象から削除\r\n+```\r\n+\r\n+**例:**\r\n+```\r\n+/totalitems enable minecraft:diamond      # ダイヤモンドを追跡対象に追加\r\n+/totalitems enable minecraft:emerald      # エメラルドを追跡対象に追加\r\n+/totalitems disable minecraft:diamond     # ダイヤモンドを追跡対象から削除\r\n+```\r\n+\r\n+**補完機能:** `enable`と`disable`コマンドではTABキーで補完が利用できます\r\n+- `enable`: ゲーム内の全アイテムから補完候補を提案\r\n+- `disable`: 現在追跡中のアイテムのみ補完候補を提案\r\n+\r\n+#### 方法2: 左手のアイテムで登録/解除（便利！）\r\n+\r\n+```\r\n+/totalitems enable lefthand    # 左手に持っているアイテムを追跡対象に追加\r\n+/totalitems disable lefthand   # 左手に持っているアイテムを追跡対象から削除\r\n+```\r\n+\r\n+**使い方:**\r\n+1. 左手にアイテムを持つ\r\n+2. `/totalitems enable lefthand` コマンドを実行\r\n+3. 自動的にそのアイテムが追跡対象に追加されます\r\n+\r\n+**例:**\r\n+```\r\n+1. 左手にダイヤモンドを持つ\r\n+2. /totalitems enable lefthand を実行\r\n+3. minecraft:diamondが追跡対象に追加される\r\n+```\r\n+\r\n+## デフォルト追跡対象\r\n+\r\n+初期状態では以下のアイテムが追跡対象です：\r\n+- minecraft:diamond（ダイヤモンド）\r\n+- minecraft:emerald（エメラルド）\r\n+- minecraft:netherite_ingot（ネザライトインゴット）\r\n+\r\n+## 設定ファイル\r\n+\r\n+設定は `config/totalitems.json` に保存されます：\r\n+\r\n+```json\r\n+{\r\n+  \"enabled\": true,\r\n+  \"trackedItems\": [\r\n+    \"minecraft:diamond\",\r\n+    \"minecraft:emerald\",\r\n+    \"minecraft:netherite_ingot\"\r\n+  ]\r\n+}\r\n+```\r\n+\r\n+直接編集することも可能です。\r\n+\r\n+## 使用例\r\n+\r\n+```bash\r\n+# MODを有効化\r\n+/totalitems on\r\n+\r\n+# ダイヤモンドとエメラルドを追跡対象に\r\n+/totalitems enable minecraft:diamond\r\n+/totalitems enable minecraft:emerald\r\n+\r\n+# 金を左手に持った状態で追跡対象に追加\r\n+/totalitems enable lefthand\r\n+\r\n+# ネザライトを追跡対象から削除\r\n+/totalitems disable minecraft:netherite_ingot\r\n+```\r\n+\r\n+## トラブルシューティング\r\n+\r\n+**アイテムカウントが表示されない場合：**\r\n+1. MODが有効化されているか確認してください（`/totalitems on`）\r\n+2. ホバーしているアイテムが追跡対象に含まれているか確認してください\r\n+3. 左手（オフハンド）のアイテムは表示対象外です\r\n+\r\n+\r\n+\r\n+\r\n+\r\n"
+                },
+                {
+                    "date": 1760867558351,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n ```\r\n \r\n **例:**\r\n ```\r\n-/totalitems enable minecraft:diamond      # ダイヤモンドを追跡対象に追加\r\n+/totalitems enable \"minecraft:diamond      # ダイヤモンドを追跡対象に追加\r\n /totalitems enable minecraft:emerald      # エメラルドを追跡対象に追加\r\n /totalitems disable minecraft:diamond     # ダイヤモンドを追跡対象から削除\r\n ```\r\n \r\n"
+                },
+                {
+                    "date": 1760867566803,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,10 +27,10 @@\n ```\r\n \r\n **例:**\r\n ```\r\n-/totalitems enable \"minecraft:diamond      # ダイヤモンドを追跡対象に追加\r\n-/totalitems enable minecraft:emerald      # エメラルドを追跡対象に追加\r\n+/totalitems enable \"minecraft:diamond\"      # ダイヤモンドを追跡対象に追加\r\n+/totalitems enable \"minecraft:emerald      # エメラルドを追跡対象に追加\r\n /totalitems disable minecraft:diamond     # ダイヤモンドを追跡対象から削除\r\n ```\r\n \r\n **補完機能:** `enable`と`disable`コマンドではTABキーで補完が利用できます\r\n"
+                },
+                {
+                    "date": 1760867572301,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,10 +28,10 @@\n \r\n **例:**\r\n ```\r\n /totalitems enable \"minecraft:diamond\"      # ダイヤモンドを追跡対象に追加\r\n-/totalitems enable \"minecraft:emerald      # エメラルドを追跡対象に追加\r\n-/totalitems disable minecraft:diamond     # ダイヤモンドを追跡対象から削除\r\n+/totalitems enable \"minecraft:emerald\"      # エメラルドを追跡対象に追加\r\n+/totalitems disable \"minecraft:diamond     # ダイヤモンドを追跡対象から削除\r\n ```\r\n \r\n **補完機能:** `enable`と`disable`コマンドではTABキーで補完が利用できます\r\n - `enable`: ゲーム内の全アイテムから補完候補を提案\r\n"
+                },
+                {
+                    "date": 1760867590617,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,10 @@\n **例:**\r\n ```\r\n /totalitems enable \"minecraft:diamond\"      # ダイヤモンドを追跡対象に追加\r\n /totalitems enable \"minecraft:emerald\"      # エメラルドを追跡対象に追加\r\n-/totalitems disable \"minecraft:diamond     # ダイヤモンドを追跡対象から削除\r\n+/totalitems disable \"minecraft:diamond\"     # ダイヤモンドを追跡対象から削除\r\n+\r\n ```\r\n \r\n **補完機能:** `enable`と`disable`コマンドではTABキーで補完が利用できます\r\n - `enable`: ゲーム内の全アイテムから補完候補を提案\r\n"
+                },
+                {
+                    "date": 1760867599242,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n /totalitems enable \"minecraft:diamond\"      # ダイヤモンドを追跡対象に追加\r\n /totalitems enable \"minecraft:emerald\"      # エメラルドを追跡対象に追加\r\n /totalitems disable \"minecraft:diamond\"     # ダイヤモンドを追跡対象から削除\r\n \r\n-※\r\n+※ｋ\r\n ```\r\n \r\n **補完機能:** `enable`と`disable`コマンドではTABキーで補完が利用できます\r\n - `enable`: ゲーム内の全アイテムから補完候補を提案\r\n"
                 }
             ],
             "date": 1760856939646,

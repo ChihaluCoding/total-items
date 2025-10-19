@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/client/java/chihalu/totalitems/mixin/client/ContainerScreenMixin.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1760857181339,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1760857181339,
+            "name": "Commit-0",
+            "content": "package chihalu.totalitems.mixin.client;\r\n\r\npublic class ContainerScreenMixin {\r\n    // このクラスは削除予定 - イベントベースで実装\r\n}\r\n\r\n"
+        }
+    ]
+}
