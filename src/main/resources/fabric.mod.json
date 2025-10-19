@@ -1,0 +1,44 @@
+{
+	"schemaVersion": 1,
+	"id": "total-items",
+	"version": "${version}",
+	"name": "Total Items",
+	"description": "インベントリ内でアイテムにマウスをホバーした時に、ツールチップに合計数量を表示するModです。",
+	"authors": [
+		"Chihalu"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/total-items/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"chihalu.totalitems.TotalItems"
+		],
+		"client": [
+			"chihalu.totalitems.TotalItemsClient"
+		],
+		"fabric-datagen": [
+			"chihalu.totalitems.TotalItemsDataGenerator"
+		]
+	},
+	"mixins": [
+		"total-items.mixins.json",
+		{
+			"config": "total-items.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.17.3",
+		"minecraft": "~1.21.9",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

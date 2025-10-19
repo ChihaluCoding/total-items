@@ -1,0 +1,46 @@
+{
+    "sourceFile": "src/main/resources/fabric.mod.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1760855500556,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1760855508697,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \t\"schemaVersion\": 1,\n \t\"id\": \"total-items\",\n \t\"version\": \"${version}\",\n \t\"name\": \"Total Items\",\n-\t\"description\": \"インベントリ内に\",\n+\t\"description\": \"インベントリ内に存在する全てのアイテムの総数を表示する。\",\n \t\"authors\": [\n \t\t\"Me!\"\n \t],\n \t\"contact\": {\n"
+                },
+                {
+                    "date": 1760855528702,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,11 +2,11 @@\n \t\"schemaVersion\": 1,\n \t\"id\": \"total-items\",\n \t\"version\": \"${version}\",\n \t\"name\": \"Total Items\",\n-\t\"description\": \"インベントリ内に存在する全てのアイテムの総数を表示する。\",\n+\t\"description\": \"インベントリ内に存在する全てのアイテムの総数を表示するModです。\",\n \t\"authors\": [\n-\t\t\"Me!\"\n+\t\t\"\"\n \t],\n \t\"contact\": {\n \t\t\"homepage\": \"https://fabricmc.net/\",\n \t\t\"sources\": \"https://github.com/FabricMC/fabric-example-mod\"\n"
+                },
+                {
+                    "date": 1760856822739,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,11 +2,11 @@\n \t\"schemaVersion\": 1,\n \t\"id\": \"total-items\",\n \t\"version\": \"${version}\",\n \t\"name\": \"Total Items\",\n-\t\"description\": \"インベントリ内に存在する全てのアイテムの総数を表示するModです。\",\n+\t\"description\": \"アイテムインベントリ内に存在する全てのアイテムの総数を表示するModです。\",\n \t\"authors\": [\n-\t\t\"\"\n+\t\t\"Chihalu\"\n \t],\n \t\"contact\": {\n \t\t\"homepage\": \"https://fabricmc.net/\",\n \t\t\"sources\": \"https://github.com/FabricMC/fabric-example-mod\"\n"
+                },
+                {
+                    "date": 1760856828430,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \t\"schemaVersion\": 1,\n \t\"id\": \"total-items\",\n \t\"version\": \"${version}\",\n \t\"name\": \"Total Items\",\n-\t\"description\": \"アイテムインベントリ内に存在する全てのアイテムの総数を表示するModです。\",\n+\t\"description\": \"アイテムにインベントリ内に存在する全てのアイテムの総数を表示するModです。\",\n \t\"authors\": [\n \t\t\"Chihalu\"\n \t],\n \t\"contact\": {\n"
+                },
+                {
+                    "date": 1760856834769,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \t\"schemaVersion\": 1,\n \t\"id\": \"total-items\",\n \t\"version\": \"${version}\",\n \t\"name\": \"Total Items\",\n-\t\"description\": \"アイテムにインベントリ内に存在する全てのアイテムの総数を表示するModです。\",\n+\t\"description\": \"アイテムの上にホバーインベントリ内に存在する全てのアイテムの総数を表示するModです。\",\n \t\"authors\": [\n \t\t\"Chihalu\"\n \t],\n \t\"contact\": {\n"
+                },
+                {
+                    "date": 1760856858580,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \t\"schemaVersion\": 1,\n \t\"id\": \"total-items\",\n \t\"version\": \"${version}\",\n \t\"name\": \"Total Items\",\n-\t\"description\": \"アイテムの上にホバーインベントリ内に存在する全てのアイテムの総数を表示するModです。\",\n+\t\"description\": \"インベントリ内でアイテムにマウスをホバーした時にツールチップに合計数量を表示する\",\n \t\"authors\": [\n \t\t\"Chihalu\"\n \t],\n \t\"contact\": {\n"
+                },
+                {
+                    "date": 1760856877575,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \t\"schemaVersion\": 1,\n \t\"id\": \"total-items\",\n \t\"version\": \"${version}\",\n \t\"name\": \"Total Items\",\n-\t\"description\": \"インベントリ内でアイテムにマウスをホバーした時にツールチップに合計数量を表示する\",\n+\t\"description\": \"インベントリ内でアイテムにマウスをホバーした時にツールチップに合計数量を表示するModです。\",\n \t\"authors\": [\n \t\t\"Chihalu\"\n \t],\n \t\"contact\": {\n"
+                }
+            ],
+            "date": 1760855500556,
+            "name": "Commit-0",
+            "content": "{\n\t\"schemaVersion\": 1,\n\t\"id\": \"total-items\",\n\t\"version\": \"${version}\",\n\t\"name\": \"Total Items\",\n\t\"description\": \"インベントリ内に\",\n\t\"authors\": [\n\t\t\"Me!\"\n\t],\n\t\"contact\": {\n\t\t\"homepage\": \"https://fabricmc.net/\",\n\t\t\"sources\": \"https://github.com/FabricMC/fabric-example-mod\"\n\t},\n\t\"license\": \"CC0-1.0\",\n\t\"icon\": \"assets/total-items/icon.png\",\n\t\"environment\": \"*\",\n\t\"entrypoints\": {\n\t\t\"main\": [\n\t\t\t\"chihalu.totalitems.TotalItems\"\n\t\t],\n\t\t\"client\": [\n\t\t\t\"chihalu.totalitems.TotalItemsClient\"\n\t\t],\n\t\t\"fabric-datagen\": [\n\t\t\t\"chihalu.totalitems.TotalItemsDataGenerator\"\n\t\t]\n\t},\n\t\"mixins\": [\n\t\t\"total-items.mixins.json\",\n\t\t{\n\t\t\t\"config\": \"total-items.client.mixins.json\",\n\t\t\t\"environment\": \"client\"\n\t\t}\n\t],\n\t\"depends\": {\n\t\t\"fabricloader\": \">=0.17.3\",\n\t\t\"minecraft\": \"~1.21.9\",\n\t\t\"java\": \">=21\",\n\t\t\"fabric-api\": \"*\"\n\t},\n\t\"suggests\": {\n\t\t\"another-mod\": \"*\"\n\t}\n}"
+        }
+    ]
+}
