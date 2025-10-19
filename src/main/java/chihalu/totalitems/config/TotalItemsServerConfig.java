@@ -29,7 +29,7 @@ public class TotalItemsServerConfig {
         public List<String> trackedItems = new ArrayList<>();
         
         public ConfigData() {
-            // デフォルト：追跡対象なし
+            // デフォルト：カウント対象なし
         }
     }
     

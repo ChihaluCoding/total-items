@@ -28,7 +28,7 @@ public class TooltipEventHandler {
                 // アイテムのIDを取得
                 String itemId = getItemId(stack);
                 
-                // 追跡対象のアイテムかチェック
+                // カウント対象のアイテムかチェック
                 if (!TotalItemsServerConfig.getTrackedItems().contains(itemId)) {
                     return;
                 }

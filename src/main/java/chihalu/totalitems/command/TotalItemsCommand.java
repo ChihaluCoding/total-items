@@ -108,12 +108,12 @@ public class TotalItemsCommand {
             trackedItems.add(itemId);
             TotalItemsServerConfig.setTrackedItems(trackedItems);
             ctx.getSource().sendFeedback(
-                () -> Text.literal("§a[Total Items] " + itemId + " を追跡対象に追加しました"),
+                () -> Text.literal("§a[Total Items] " + itemId + " をカウント対象に追加しました"),
                 false
             );
         } else {
             ctx.getSource().sendFeedback(
-                () -> Text.literal("§e[Total Items] " + itemId + " は既に追跡対象です"),
+                () -> Text.literal("§e[Total Items] " + itemId + " は既にカウント対象です"),
                 false
             );
         }
@@ -127,12 +127,12 @@ public class TotalItemsCommand {
         if (trackedItems.remove(itemId)) {
             TotalItemsServerConfig.setTrackedItems(trackedItems);
             ctx.getSource().sendFeedback(
-                () -> Text.literal("§a[Total Items] " + itemId + " を追跡対象から削除しました"),
+                () -> Text.literal("§a[Total Items] " + itemId + " をカウント対象から削除しました"),
                 false
             );
         } else {
             ctx.getSource().sendFeedback(
-                () -> Text.literal("§e[Total Items] " + itemId + " は追跡対象に含まれていません"),
+                () -> Text.literal("§e[Total Items] " + itemId + " はカウント対象に含まれていません"),
                 false
             );
         }
@@ -140,7 +140,7 @@ public class TotalItemsCommand {
     }
     
     /**
-     * オフハンド（左手）に持っているアイテムを追跡対象に追加
+     * オフハンド（左手）に持っているアイテムをカウント対象に追加
      */
     private static int executeEnableOffhand(CommandContext<ServerCommandSource> ctx) {
         net.minecraft.server.network.ServerPlayerEntity player = ctx.getSource().getPlayer();
@@ -162,12 +162,12 @@ public class TotalItemsCommand {
             trackedItems.add(itemId);
             TotalItemsServerConfig.setTrackedItems(trackedItems);
             ctx.getSource().sendFeedback(
-                () -> Text.literal("§a[Total Items] " + itemId + " を追跡対象に追加しました"),
+                () -> Text.literal("§a[Total Items] " + itemId + " をカウント対象に追加しました"),
                 false
             );
         } else {
             ctx.getSource().sendFeedback(
-                () -> Text.literal("§e[Total Items] " + itemId + " は既に追跡対象です"),
+                () -> Text.literal("§e[Total Items] " + itemId + " は既にカウント対象です"),
                 false
             );
         }
@@ -175,7 +175,7 @@ public class TotalItemsCommand {
     }
     
     /**
-     * オフハンド（左手）に持っているアイテムを追跡対象から削除
+     * オフハンド（左手）に持っているアイテムをカウント対象から削除
      */
     private static int executeDisableOffhand(CommandContext<ServerCommandSource> ctx) {
         net.minecraft.server.network.ServerPlayerEntity player = ctx.getSource().getPlayer();
@@ -196,12 +196,12 @@ public class TotalItemsCommand {
         if (trackedItems.remove(itemId)) {
             TotalItemsServerConfig.setTrackedItems(trackedItems);
             ctx.getSource().sendFeedback(
-                () -> Text.literal("§a[Total Items] " + itemId + " を追跡対象から削除しました"),
+                () -> Text.literal("§a[Total Items] " + itemId + " をカウント対象から削除しました"),
                 false
             );
         } else {
             ctx.getSource().sendFeedback(
-                () -> Text.literal("§e[Total Items] " + itemId + " は追跡対象に含まれていません"),
+                () -> Text.literal("§e[Total Items] " + itemId + " はカウント対象に含まれていません"),
                 false
             );
         }
@@ -227,7 +227,7 @@ public class TotalItemsCommand {
     }
     
     /**
-     * 現在追跡中のアイテムIDの補完を提供
+     * 現在カウント中のアイテムIDの補完を提供
      */
     private static CompletableFuture<Suggestions> suggestTrackedItems(
             CommandContext<ServerCommandSource> context, SuggestionsBuilder builder) {
@@ -244,21 +244,21 @@ public class TotalItemsCommand {
     }
     
     /**
-     * 現在追跡中のアイテムを一覧表示
+     * 現在カウント中のアイテムを一覧表示
      */
     private static int executeList(CommandContext<ServerCommandSource> ctx) {
         java.util.List<String> trackedItems = TotalItemsServerConfig.getTrackedItems();
         
         if (trackedItems.isEmpty()) {
             ctx.getSource().sendFeedback(
-                () -> Text.literal("§e[Total Items] 現在、追跡対象のアイテムはありません"),
+                () -> Text.literal("§e[Total Items] 現在、カウント対象のアイテムはありません"),
                 false
             );
             return 0;
         }
         
         ctx.getSource().sendFeedback(
-            () -> Text.literal("§a[Total Items] 追跡対象のアイテム一覧（" + trackedItems.size() + "個）:"),
+            () -> Text.literal("§a[Total Items] カウント対象のアイテム一覧（" + trackedItems.size() + "個）:"),
             false
         );
         
@@ -273,7 +273,7 @@ public class TotalItemsCommand {
     }
     
     /**
-     * 全アイテムを追跡対象に追加（有効化）
+     * 全アイテムをカウント対象に追加（有効化）
      */
     private static int executeAllEnable(CommandContext<ServerCommandSource> ctx) {
         java.util.List<String> allItems = new ArrayList<>();
@@ -284,7 +284,7 @@ public class TotalItemsCommand {
         TotalItemsServerConfig.setTrackedItems(allItems);
         
         ctx.getSource().sendFeedback(
-            () -> Text.literal("§a[Total Items] 全アイテム（" + allItems.size() + "個）を追跡対象に設定しました"),
+            () -> Text.literal("§a[Total Items] 全アイテム（" + allItems.size() + "個）をカウント対象に設定しました"),
             false
         );
         
@@ -292,7 +292,7 @@ public class TotalItemsCommand {
     }
     
     /**
-     * 全追跡対象アイテムを削除（無効化）
+     * 全カウント対象アイテムを削除（無効化）
      */
     private static int executeAllDisable(CommandContext<ServerCommandSource> ctx) {
         int previousCount = TotalItemsServerConfig.getTrackedItems().size();
@@ -300,7 +300,7 @@ public class TotalItemsCommand {
         TotalItemsServerConfig.setTrackedItems(new ArrayList<>());
         
         ctx.getSource().sendFeedback(
-            () -> Text.literal("§a[Total Items] " + previousCount + "個の追跡対象アイテムをすべて削除しました"),
+            () -> Text.literal("§a[Total Items] " + previousCount + "個のカウント対象アイテムをすべて削除しました"),
             false
         );
         
