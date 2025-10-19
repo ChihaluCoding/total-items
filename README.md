@@ -80,12 +80,22 @@
 /totalitems disable "minecraft:netherite_ingot"
 ```
 
+## カウント設定の確認と一括管理
+
+```
+/totalitems list         # 現在のカウント対象アイテム一覧を表示
+/totalitems all enable   # 全アイテムをカウント対象に追加（有効化）
+/totalitems all disable  # 全カウント対象アイテムを削除（無効化）
+```
+
 ## トラブルシューティング
 
 **アイテムカウントが表示されない場合：**
 1. MODが有効化されているか確認してください（`/totalitems on`）
 2. ホバーしているアイテムがカウント対象に含まれているか確認してください
 3. 左手（オフハンド）のアイテムは表示対象外です
+
+
 
 
 

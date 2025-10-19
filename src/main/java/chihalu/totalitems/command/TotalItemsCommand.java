@@ -57,6 +57,21 @@ public class TotalItemsCommand {
                                 .executes(ctx -> executeDisableOffhand(ctx))
                         )
                 )
+                .then(
+                    CommandManager.literal("list")
+                        .executes(ctx -> executeList(ctx))
+                )
+                .then(
+                    CommandManager.literal("all")
+                        .then(
+                            CommandManager.literal("enable")
+                                .executes(ctx -> executeAllEnable(ctx))
+                        )
+                        .then(
+                            CommandManager.literal("disable")
+                                .executes(ctx -> executeAllDisable(ctx))
+                        )
+                )
         );
     }
     
@@ -226,5 +241,69 @@ public class TotalItemsCommand {
         });
         
         return builder.buildFuture();
+    }
+    
+    /**
+     * 現在追跡中のアイテムを一覧表示
+     */
+    private static int executeList(CommandContext<ServerCommandSource> ctx) {
+        java.util.List<String> trackedItems = TotalItemsServerConfig.getTrackedItems();
+        
+        if (trackedItems.isEmpty()) {
+            ctx.getSource().sendFeedback(
+                () -> Text.literal("§e[Total Items] 現在、追跡対象のアイテムはありません"),
+                false
+            );
+            return 0;
+        }
+        
+        ctx.getSource().sendFeedback(
+            () -> Text.literal("§a[Total Items] 追跡対象のアイテム一覧（" + trackedItems.size() + "個）:"),
+            false
+        );
+        
+        trackedItems.forEach(itemId -> {
+            ctx.getSource().sendFeedback(
+                () -> Text.literal("  §6- " + itemId),
+                false
+            );
+        });
+        
+        return 1;
+    }
+    
+    /**
+     * 全アイテムを追跡対象に追加（有効化）
+     */
+    private static int executeAllEnable(CommandContext<ServerCommandSource> ctx) {
+        java.util.List<String> allItems = new ArrayList<>();
+        Registries.ITEM.getIds().forEach(id -> {
+            allItems.add(id.toString());
+        });
+        
+        TotalItemsServerConfig.setTrackedItems(allItems);
+        
+        ctx.getSource().sendFeedback(
+            () -> Text.literal("§a[Total Items] 全アイテム（" + allItems.size() + "個）を追跡対象に設定しました"),
+            false
+        );
+        
+        return 1;
+    }
+    
+    /**
+     * 全追跡対象アイテムを削除（無効化）
+     */
+    private static int executeAllDisable(CommandContext<ServerCommandSource> ctx) {
+        int previousCount = TotalItemsServerConfig.getTrackedItems().size();
+        
+        TotalItemsServerConfig.setTrackedItems(new ArrayList<>());
+        
+        ctx.getSource().sendFeedback(
+            () -> Text.literal("§a[Total Items] " + previousCount + "個の追跡対象アイテムをすべて削除しました"),
+            false
+        );
+        
+        return 1;
     }
 }
